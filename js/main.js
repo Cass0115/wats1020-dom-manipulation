@@ -16,41 +16,32 @@ $( document ).ready(function() {
     // Place all your Javascript code inside this "document ready" function so
     // it does not run until the DOM is ready for Javascript manipulation.
 
-    // TODO: Create a function to listen for clicks on the "login" button.
-    //      1. When a user clicks the "login" button, hide the login
-    //          form elements on the page.
-    //      2. Fill the user's first and last name into `div.user-info`.
-    //      (NOTE: You do not have to perform any validation on the data as
-    //          a base requirement.)
 
+  //function tracking the clicks:
     $('.loginclick').on('click',function(event){
+      //fading out the login form:
       $('#login-form').fadeOut();
-      
+      //fading in the users full name:
       var fullName = userInfo.firstName + ' ' + userInfo.lastName;
       $('.user-fullname').text(fullName);
       $('.user-info').fadeIn();
     }
     );
 
-    // TODO: Create a function to listen for clicks on all the "View Details"
-    // buttons so that when a user clicks a "View Details" button they see
-    // the content contained in the elements with the class "details" in the
-    // proper part of the screen.
-    //      1. When user clicks a "view details" button, find the parent of that element.
-    //      2. Within that parent, find all the elements that have the class `details`.
-    //      3. Toggle visibility of all the elements within that parent with the class `details`.
-    //      4. Change the text of the "view details" button to read "hide details" so the user
-    //          understands they can hide the text again.
+   
+    //function tracking the clicks:
     $('.view-details').on('click',function(event){
-        console.log(event);
+        //targeting the event:
         var targetElement = event.target;
+        // making a container for the elements grandparent:
         var container = targetElement.parentElement.parentElement;
+        //new function to find if he element is not visible, have button say view details
         $(container).find('.details').each(function(index, element){
            if ( $(element).is(':visible') ){
              $(element).fadeOut();
              targetElement.innerText = "View Details"
 
-            
+           //Or if the element is visible have the button say hide details 
            }else {
              $(element).fadeIn();
              targetElement.innerText = "Hide Details"
@@ -69,20 +60,21 @@ $( document ).ready(function() {
     //      3. Increment the counter for whichever vote talley is affected.
     //      4. Determine the respective percentages (out of 100) for each progress bar.
     //      5. Modify the `width` attribute on each progress bar to set the updated percentage.
-
+  //function tracking the click:
   $('.vote').on('click', function(event){
+    //targeting the click event:
     var targetElement = event.target;
     var result = $(targetElement).data('vote');
-    
+    //if result is great add 1 vote:
     if (result === "great"){
       voteCounts.great++;
-      
+     //if click result is greatest add 1:
     }else if (result === "greatest"){
       voteCounts.greatest++;
            
     }
     voteCounts.total++;
-    
+    //the math for the width of the voting bars:
     $('.great-progress').width((voteCounts.great/100)*100 + '%' );
     $('.greatest-progress').width((voteCounts.greatest/100)*100 + '%' );
   }
