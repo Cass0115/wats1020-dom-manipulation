@@ -23,6 +23,14 @@ $( document ).ready(function() {
     //      (NOTE: You do not have to perform any validation on the data as
     //          a base requirement.)
 
+    $('.loginclick').on('click',function(event){
+      $('#login-form').fadeOut();
+      
+      var fullName = userInfo.firstName + ' ' + userInfo.lastName;
+      $('.user-fullname').text(fullName);
+      $('.user-info').fadeIn();
+    }
+    );
 
     // TODO: Create a function to listen for clicks on all the "View Details"
     // buttons so that when a user clicks a "View Details" button they see
@@ -33,9 +41,7 @@ $( document ).ready(function() {
     //      3. Toggle visibility of all the elements within that parent with the class `details`.
     //      4. Change the text of the "view details" button to read "hide details" so the user
     //          understands they can hide the text again.
-    $('.view-details').on('click',
-
-    function(event){
+    $('.view-details').on('click',function(event){
         console.log(event);
         var targetElement = event.target;
         var container = targetElement.parentElement.parentElement;
@@ -44,6 +50,7 @@ $( document ).ready(function() {
              $(element).fadeOut();
              targetElement.innerText = "View Details"
 
+            
            }else {
              $(element).fadeIn();
              targetElement.innerText = "Hide Details"
@@ -63,4 +70,48 @@ $( document ).ready(function() {
     //      4. Determine the respective percentages (out of 100) for each progress bar.
     //      5. Modify the `width` attribute on each progress bar to set the updated percentage.
 
+  $('.vote').on('click', function(event){
+    var targetElement = event.target;
+    var result = $(targetElement).data('vote');
+    
+    if (result === "great"){
+      voteCounts.great++;
+      
+    }else if (result === "greatest"){
+      voteCounts.greatest++;
+           
+    }
+    voteCounts.total++;
+    
+    $('.great-progress').width((voteCounts.great/100)*100 + '%' );
+    $('.greatest-progress').width((voteCounts.greatest/100)*100 + '%' );
+  }
+  );
+  
+  
+  
+  
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
